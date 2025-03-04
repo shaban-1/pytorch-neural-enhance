@@ -96,7 +96,7 @@ for im_count, (original_link, expert_link) in zip(idxs, zip(original_links, expe
         #Clean temp dng
         os.remove('temp.dng')
         image = Image.fromarray(rgb)
-        image.thumbnail((size, size), Image.ANTIALIAS)
+        image.thumbnail((size, size), Image.LANCZOS)
         image.save(filename) 
         
     info_dataframe.at[im_count, 'original_path'] = filename 
@@ -110,7 +110,7 @@ for im_count, (original_link, expert_link) in zip(idxs, zip(original_links, expe
             image_link = os.path.join(base_link, link)
             response = requests.get(image_link, stream=True)
             image = Image.open(response.raw)
-            image.thumbnail((size, size), Image.ANTIALIAS)
+            image.thumbnail((size, size), Image.LANCZOS)
             image.save(filename)
         info_dataframe.at[im_count, 'expert{}_path'.format(expert_count)] = filename   
     
